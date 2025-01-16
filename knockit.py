@@ -4,21 +4,6 @@ import socket
 import sys
 import argparse
 
-print("\n******************************************************")
-print("*                                                    *")
-print("*  _  __                     _     _____  _          *")
-print("* | |/ /                    | |   |_   _|| |         *")
-print("* | ' /  _ __    ___    ___ | | __  | |  | |_        *")
-print("* |  <  | '_ \  / _ \  / __|| |/ /  | |  | __|       *")
-print("* | . \ | | | || (_) || (__ |   <  _| |_ | |_        *")
-print("* |_|\_\|_| |_| \___/  \___||_|\_\|_____| \__|       *")
-print("*                                                    *")
-print("*                                                    *")
-print("* KnockIt v1.0                                       *")
-print("* Coded by thebish0p                                 *")
-print("* https://github.com/thebish0p/                      *")
-print("******************************************************\n\n")
-
 class Knockit(object):
     def __init__(self, args: list):
         self._parse_args(args)
