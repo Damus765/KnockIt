@@ -20,14 +20,23 @@ class Knockit(object):
         self.ports = args.ports
         self.host= args.host
 
+    def _log_knock(self, addrfamily, sockaddr):
+        if addrfamily == socket.AF_INET6:
+            print(f'[+] Knocking on port [{sockaddr[0]}]:{sockaddr[1]}')
+        else:
+            print(f'[+] Knocking on port {sockaddr[0]}:{sockaddr[1]}')
 
     def knockit(self):
         self.ports = list(map(int, self.ports))
         for port in self.ports:
-            print("[+] Knocking on port %s:%s" % (self.host,port))
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+            addrinfos = socket.getaddrinfo(self.host, port, socket.AF_UNSPEC, socket.SOCK_STREAM, socket.IPPROTO_TCP)
+            addrfamily, socktype, sockproto, _, sockaddr = addrinfos[0]
+            
+            self._log_knock(addrfamily, sockaddr)
+            
+            sock = socket.socket(addrfamily, socktype, sockproto)
             sock.settimeout(self.delay)
-            sock.connect_ex((self.host, port))
+            sock.connect_ex(sockaddr)
             sock.close()
 
 
